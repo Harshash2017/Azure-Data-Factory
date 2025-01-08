@@ -1,0 +1,49 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_SCD2csv",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_SCDTargetcsv",
+						"type": "DatasetReference"
+					},
+					"name": "target"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          user_id as string,",
+				"          subscription as string,",
+				"          price as string,",
+				"          location as string,",
+				"          pincode as string,",
+				"          isactive as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          user_id as string,",
+				"          subscription as string,",
+				"          price as string,",
+				"          location as string,",
+				"          pincode as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> target"
+			]
+		}
+	}
+}
