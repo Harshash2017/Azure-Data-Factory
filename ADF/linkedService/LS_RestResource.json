@@ -1,0 +1,15 @@
+{
+	"name": "LS_RestResource",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://sgsharma40.dfs.core.windows.net/",
+			"accountKey": {
+				"type": "SecureString",
+				"value": "**********"
+			}
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"name": "DS_IncrementSql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

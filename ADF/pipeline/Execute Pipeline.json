@@ -1,0 +1,49 @@
+{
+	"name": "Execute Pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "For Loop 1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "get meta data activity",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Get meta data",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "For Loop 1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "get meta data activity",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-01-08T10:14:51Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
