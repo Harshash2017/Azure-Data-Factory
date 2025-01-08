@@ -1,0 +1,57 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "sharmaadf25"
+		},
+		"LS_Adls_accountKey": {
+			"value": ""
+		},
+		"LS_AzureSql_password": {
+			"value": ""
+		},
+		"LS_RestResource_accountKey": {
+			"value": ""
+		},
+		"Sftp1_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase_key Vault_properties_typeProperties_server": {
+			"value": "harshaserver2025.database.windows.net"
+		},
+		"AzureSqlDatabase_key Vault_properties_typeProperties_database": {
+			"value": "harshasha"
+		},
+		"AzureSqlDatabase_key Vault_properties_typeProperties_userName": {
+			"value": "harshasha"
+		},
+		"LS_Adls_properties_typeProperties_url": {
+			"value": "https://sgsharma40.dfs.core.windows.net/"
+		},
+		"LS_AzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://harshaazurekeyvault.vault.azure.net/"
+		},
+		"LS_AzureSql_properties_typeProperties_server": {
+			"value": "harshaserver2025.database.windows.net"
+		},
+		"LS_AzureSql_properties_typeProperties_database": {
+			"value": "harshasha"
+		},
+		"LS_AzureSql_properties_typeProperties_userName": {
+			"value": "harshasha"
+		},
+		"LS_RestResource_properties_typeProperties_url": {
+			"value": "https://sgsharma40.dfs.core.windows.net/"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://restcountries.com/v3.1/region/europe"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"value": "test.rebex.net"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"value": "demo"
+		}
+	}
+}
