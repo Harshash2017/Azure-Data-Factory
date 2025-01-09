@@ -1,0 +1,16 @@
+{
+	"name": "DS_auto_SQLDB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "saleslt",
+			"table": "Order"
+		}
+	}
+}

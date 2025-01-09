@@ -6,21 +6,64 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DS_SCD2csv",
-						"type": "DatasetReference"
-					},
-					"name": "source1"
-				},
-				{
-					"dataset": {
-						"referenceName": "DS_SCDTargetcsv",
+						"referenceName": "DS_target_csv",
 						"type": "DatasetReference"
 					},
 					"name": "target"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_source_csv",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_sinkSource_csv",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_sink_target_csv",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Sourcehash"
+				},
+				{
+					"name": "Targethash"
+				},
+				{
+					"name": "exists1"
+				},
+				{
+					"name": "isactive"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "exists2"
+				},
+				{
+					"name": "exists3"
+				},
+				{
+					"name": "isinactive"
+				},
+				{
+					"name": "alterRow1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          user_id as string,",
@@ -32,7 +75,7 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1",
+				"     ignoreNoFilesFound: false) ~> target",
 				"source(output(",
 				"          user_id as string,",
 				"          subscription as string,",
@@ -42,7 +85,57 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> target"
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive(hash = md5(user_id, subscription, price, location,pincode)) ~> Sourcehash",
+				"target derive(hash = md5(user_id,subscription,price,location,pincode)) ~> Targethash",
+				"Sourcehash, Targethash exists(Sourcehash@hash == Targethash@hash,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> exists1",
+				"exists1 derive({is active} = 1) ~> isactive",
+				"isactive select(mapColumn(",
+				"          user_id,",
+				"          subscription,",
+				"          price,",
+				"          location,",
+				"          pincode,",
+				"          {is active}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"Targethash, Sourcehash exists(target@user_id == source1@user_id,",
+				"     negate:false,",
+				"     broadcast: 'auto')~> exists2",
+				"exists2, Sourcehash exists(Targethash@hash == Sourcehash@hash,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> exists3",
+				"exists3 derive(isactive = 0) ~> isinactive",
+				"isinactive alterRow(updateIf(0==0)) ~> alterRow1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          user_id as string,",
+				"          subscription as string,",
+				"          price as string,",
+				"          location as string,",
+				"          pincode as string,",
+				"          isactive as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          user_id as string,",
+				"          subscription as string,",
+				"          price as string,",
+				"          location as string,",
+				"          pincode as string,",
+				"          isactive as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink2"
 			]
 		}
 	}
