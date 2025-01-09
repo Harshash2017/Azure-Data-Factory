@@ -19,6 +19,18 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_RestResource'"
 		},
+		"LS_SCDcsv_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SCDcsv'"
+		},
+		"LS_SQL_DB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQL_DB'"
+		},
+		"LS_dataflow_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_dataflow'"
+		},
 		"Sftp1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Sftp1'"
@@ -56,6 +68,22 @@
 			"defaultValue": "harshasha"
 		},
 		"LS_RestResource_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sgsharma40.dfs.core.windows.net/"
+		},
+		"LS_SQL_DB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "harshaserver2025.database.windows.net"
+		},
+		"LS_SQL_DB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "harshasha"
+		},
+		"LS_SQL_DB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "harshasha"
+		},
+		"LS_dataflow_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://sgsharma40.dfs.core.windows.net/"
 		},
@@ -107,6 +135,15 @@
 					"LS_RestResource_accountKey": {
 						"value": "[parameters('LS_RestResource_accountKey')]"
 					},
+					"LS_SCDcsv_connectionString": {
+						"value": "[parameters('LS_SCDcsv_connectionString')]"
+					},
+					"LS_SQL_DB_password": {
+						"value": "[parameters('LS_SQL_DB_password')]"
+					},
+					"LS_dataflow_accountKey": {
+						"value": "[parameters('LS_dataflow_accountKey')]"
+					},
 					"Sftp1_password": {
 						"value": "[parameters('Sftp1_password')]"
 					},
@@ -127,6 +164,18 @@
 					},
 					"LS_RestResource_properties_typeProperties_url": {
 						"value": "[parameters('LS_RestResource_properties_typeProperties_url')]"
+					},
+					"LS_SQL_DB_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_DB_properties_typeProperties_server')]"
+					},
+					"LS_SQL_DB_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_DB_properties_typeProperties_database')]"
+					},
+					"LS_SQL_DB_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_DB_properties_typeProperties_userName')]"
+					},
+					"LS_dataflow_properties_typeProperties_url": {
+						"value": "[parameters('LS_dataflow_properties_typeProperties_url')]"
 					},
 					"RestService1_properties_typeProperties_url": {
 						"value": "[parameters('RestService1_properties_typeProperties_url')]"
@@ -168,6 +217,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'sharmaadf25_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "sharmaadf25_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'sharmaadf25_ArmTemplate_1')]"
 			]
 		}
 	]

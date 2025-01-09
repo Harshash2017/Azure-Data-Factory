@@ -14,6 +14,15 @@
 		"LS_RestResource_accountKey": {
 			"value": ""
 		},
+		"LS_SCDcsv_connectionString": {
+			"value": ""
+		},
+		"LS_SQL_DB_password": {
+			"value": ""
+		},
+		"LS_dataflow_accountKey": {
+			"value": ""
+		},
 		"Sftp1_password": {
 			"value": ""
 		},
@@ -42,6 +51,18 @@
 			"value": "harshasha"
 		},
 		"LS_RestResource_properties_typeProperties_url": {
+			"value": "https://sgsharma40.dfs.core.windows.net/"
+		},
+		"LS_SQL_DB_properties_typeProperties_server": {
+			"value": "harshaserver2025.database.windows.net"
+		},
+		"LS_SQL_DB_properties_typeProperties_database": {
+			"value": "harshasha"
+		},
+		"LS_SQL_DB_properties_typeProperties_userName": {
+			"value": "harshasha"
+		},
+		"LS_dataflow_properties_typeProperties_url": {
 			"value": "https://sgsharma40.dfs.core.windows.net/"
 		},
 		"RestService1_properties_typeProperties_url": {
